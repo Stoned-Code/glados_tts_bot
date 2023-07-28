@@ -7,3 +7,6 @@ Uses two different processes to run properly.
 2. main.py - The `main.py`` script runs the bot and sends messages to turn into speech to the tts_socket.py process using websockets. Then, it loads the file it saves and plays it in the voice channel.
 
 When someone uses the TTS channel, the bot will automatically join, and add them to a list of users currently using the TTS bot. Every time someone that uses the TTS bot leaves, it removes them from the user list. When there is no longer anyone in the list, the bot automatically leaves.
+
+## To-Do
+1. Make name replacements.

@@ -5,6 +5,7 @@ import asyncio
 from multiprocessing import Pool
 import json
 
+
 class Messages:
     @staticmethod
     def read_queue(path, callback):
