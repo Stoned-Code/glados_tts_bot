@@ -1,9 +1,5 @@
 from os import name
 
-from sc_libs.discord.command_class import Command_Class
-
-import discord
-
 
 class Command:
     """SC Command

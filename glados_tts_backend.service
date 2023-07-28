@@ -1,10 +1,10 @@
 [Unit]
-Description=GLaDOS TTS bot
+Description=GLaDOS TTS backend
 
 [Service]
 User=root
 WorkingDirectory=/srv/glados_tts_bot
-ExecStart=/srv/glados_tts_bot/.env/bin/python3 tts_socket.py
+ExecStart=/srv/glados_tts_bot/.env/bin/python3 tts_backend.py
 Restart=always
 
 [Install]

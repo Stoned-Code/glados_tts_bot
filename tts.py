@@ -1,9 +1,11 @@
-import torch
-from glados_tts.utils.tools import prepare_text
-from scipy.io.wavfile import write
-import time
 import sys
+import time
 from sys import modules as mod
+
+import torch
+from scipy.io.wavfile import write
+
+from glados_tts.utils.tools import prepare_text
 
 try:
     import winsound
@@ -34,6 +36,7 @@ class GLaDOS:
 
         print('Finished loading GLaDOS model.')
 
+
     def init_model(self):
         self.model = torch.jit.load(self.model_path)
         self.vocoder = torch.jit.load(self.vocoder_path, map_location=self.device)
@@ -42,6 +45,7 @@ class GLaDOS:
             init = self.model.generate_jit(prepare_text(str(i)))
             init_mel = init['mel_post'].to(self.device)
             init_vo = self.vocoder(init_mel)
+
 
     def announce_function(self, func):
         def wrapper(*args, **kwargs):
@@ -52,7 +56,7 @@ class GLaDOS:
                 return result
         
         return wrapper
-    
+
 
     def tts(self, text, save_tts = False, output_path = 'output.wav', play_sound = False):
 
@@ -87,17 +91,6 @@ class GLaDOS:
             
             return audio
 
-
-    def announce_function(self, func):
-        def wrapper(*args, **kwargs):
-            message = 'Executing {} function.'.format(func.__name__)
-            self.tts(message)
-            result = func(*args, **kwargs)
-
-            if result != None:
-                return result
-        
-        return wrapper
 
 
 if __name__ == '__main__':

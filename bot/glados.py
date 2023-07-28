@@ -1,14 +1,12 @@
-import asyncio
 import os
-from discord import FFmpegPCMAudio, VoiceChannel, VoiceState
+
+from discord import FFmpegPCMAudio, VoiceChannel
 from discord.ext.commands import Bot
-from discord.message import Message
 from discord.ext.commands.context import Context
-import discord
-from utils.tts_client import GLaDOS_Client
-from utils.message_queue import Messages
-from scipy.io.wavfile import write
+from discord.message import Message
+
 from bot_params import TTS_SAVE_PATH
+from utils.tts_client import GLaDOS_Client
 
 
 class GLaDOS_Bot:
@@ -75,7 +73,7 @@ class GLaDOS_Bot:
 
         return id in users
     
-    
+
     def add_tts(self, msg, *content):
         user_id = msg.author.id
         user_name = msg.author.name
@@ -94,3 +92,7 @@ class GLaDOS_Bot:
         template = template.format(msg.author.display_name, msg.content if len(content) < 1 else ' '.join(list(content)))
 
         self.msg_queue.add(template)
+
+
+    def add_tts(self, msg):
+        self.msg_queue.add(msg)

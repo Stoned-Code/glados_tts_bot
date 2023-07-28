@@ -12,7 +12,7 @@ class SCHelp(Command_Class):
     command_color = 0x800080
     bot_description = 'No description available.'
 
-    def __init__(self, client: Bot, commands: SCCommands):
+    def __init__(self, client: Bot, commands: SCCommands, description = None, thumbnail = None):
         """
         A more stylish help command than the default discord.py help command.
 
@@ -24,6 +24,12 @@ class SCHelp(Command_Class):
         client.remove_command('help')  # Removes the default help command.
         self.commands = commands
         super().__init__(client)
+
+        if description != None:
+            self.bot_description = description
+        
+        if thumbnail != None:
+            self.help_thumbnail = thumbnail
 
 
     def load_commands(self):

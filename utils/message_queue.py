@@ -1,22 +1,23 @@
-from collections import deque
-from threading import Thread
-from time import sleep
 import asyncio
-from multiprocessing import Pool
 import json
-
+from collections import deque
+from multiprocessing import Pool
+import os
 
 class Messages:
     @staticmethod
     def read_queue(path, callback):
-        with open(path, 'rb') as f:
-            jstr = f.read().decode()
-        
-        msg_q = Messages(callback)
-        j_obj = json.loads(jstr)
-        [msg_q.add(msg) for msg in j_obj]
+        if os.path.exists(path):
+            with open(path, 'rb') as f:
+                jstr = f.read().decode()
+            
+            msg_q = Messages(callback)
+            j_obj = json.loads(jstr)
+            [msg_q.add(msg) for msg in j_obj]
 
-        return msg_q
+            return msg_q
+        else:
+            return Messages(callback)
         
     def __init__(self, callback):
         self._msg_queue = deque()

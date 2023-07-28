@@ -1,6 +1,6 @@
 import asyncio
+
 from websockets.sync.client import connect
-import numpy as np
 
 
 class GLaDOS_Client:
