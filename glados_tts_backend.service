@@ -1,0 +1,11 @@
+[Unit]
+Description=GLaDOS TTS bot
+
+[Service]
+User=root
+WorkingDirectory=/srv/glados_tts_bot
+ExecStart=/srv/glados_tts_bot/.env/bin/python3 tts_socket.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
