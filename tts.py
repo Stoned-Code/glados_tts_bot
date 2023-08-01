@@ -13,6 +13,13 @@ except ImportError:
     from subprocess import call
 
 
+def process_audio(audio):
+    audio = audio.squeeze()
+    audio = audio * 32768.0
+    audio = audio.cpu().numpy().astype('int16')
+
+    return audio
+
 class GLaDOS:
     def __init__(self, device = None, verbose = False, model_path = 'glados_tts/models/glados.pt', vocoder_path = 'glados_tts/models/vocoder-gpu.pt'):
         if device == None:
@@ -75,11 +82,10 @@ class GLaDOS:
                 old_time = time.time()
                 print("HiFiGAN took " + str((time.time() - old_time) * 1000) + "ms")
 
-            audio = audio.squeeze()
-            audio = audio * 32768.0
-            audio = audio.cpu().numpy().astype('int16')
+            audio = process_audio(audio)
 
             output_file = (output_path)
+            
             if save_tts:
                 write(output_file, 22050, audio)
             
