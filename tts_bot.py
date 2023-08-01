@@ -28,7 +28,7 @@ if __name__ == '__main__':
     token = read_token(token)
 
     tts_channel = 1134547317593219092
-    use_channel_id = True
+    use_channel_id = False
     auto_connect = True
 
     intents = discord.Intents.all()
